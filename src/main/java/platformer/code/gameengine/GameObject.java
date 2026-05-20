@@ -46,3 +46,4 @@ public class GameObject {
 		return height;
 	}
 }
+
