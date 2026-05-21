@@ -199,11 +199,24 @@ public class Level {
 	private void water(int col, int row, Map map, int fullness) {
 		Water w = new Water(col, row, tileSize, tileset.getImage("Full_water"), this, fullness);
 		map.addTile(col, row, w);
-		if (col + 1 < map.getTiles().length && map.getTiles()[col+1][row].isSolid())
+		Water n = new Water(col, row, tileSize, tileset.getImage("Half_water"), this, fullness/2);
+		if (col + 1 < map.getTiles().length && !(map.getTiles()[col+1][row] instanceof Water) && !(map.getTiles()[col - 1][row] instanceof Water))
 		{
-			water(col+1, row, map, fullness);
+			water(col + 1, row, map, fullness);
+			if (col + 2 < map.getTiles().length && !(map.getTiles()[col+2][row] instanceof Water) && !(map.getTiles()[col - 1][row] instanceof Water))
+			{
+				water(col + 2, row, map, fullness/2); 
+				map.addTile(col + 2, row, n);
+			}
+			else{
+
+			}
 		}
-		if (col - 1 >= 0 && map)
+		if (col - 1 >= 0 && map.getTiles()[col - 1][row] instanceof Water)
+		{
+			water(col - 1, row, map, fullness);
+		}
+		
 	}
 
 
