@@ -208,13 +208,15 @@ public class Level {
 				water(col + 2, row, map, fullness/2); 
 				map.addTile(col + 2, row, n);
 			}
-			else{
-
-			}
 		}
 		if (col - 1 >= 0 && map.getTiles()[col - 1][row] instanceof Water)
 		{
 			water(col - 1, row, map, fullness);
+			if (col - 2 >= 0 && map.getTiles()[col - 2][row] instanceof Water)
+			{
+				water(col - 2, row, map, fullness/2); 
+				map.addTile(col + 2, row, n);
+			}
 		}
 		
 	}
